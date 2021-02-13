@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-// const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 const { checkId } = require('./middlewares')
 
 const Service = require('../models/Service.model')
-// const User = require('../models/User.model')
+const User = require('../models/User.model')
 
 
 router.get('/getAllServices', (req, res) => {
@@ -21,9 +21,8 @@ router.get('/getAllServices', (req, res) => {
 
 router.get('/filterByProvince/:province', (req, res) => {
 
-    Service
-        .find({province: req.params.owner})
-        .populate('owner')
+    User
+        .find({ province: req.params.province })
         .then(response => {
             console.log(response)
             res.json(response)
@@ -32,12 +31,12 @@ router.get('/filterByProvince/:province', (req, res) => {
 })
 
 
-router.get('/getOneService/:service_id', checkId, (req, res) => {
+router.get('/getOneService/:service_id', /*checkId,*/(req, res) => {
 
-    // if (!mongoose.Types.ObjectId.isValid(req.params.service_id)) {
-    //     res.status(404).json({ message: 'Invalid ID' })
-    //     return
-    // }
+    if (!mongoose.Types.ObjectId.isValid(req.params.service_id)) {
+        res.status(404).json({ message: 'Invalid ID' })
+        return
+    }
 
     Service
         .findById(req.params.service_id)
@@ -47,21 +46,22 @@ router.get('/getOneService/:service_id', checkId, (req, res) => {
 })
 
 //Nuevo desde aquí...
-// router.get('/getAllServicesFromUser/:user_id', (req, res) => {
+router.get('/getAllServicesFromUser/:user_id', (req, res) => {
 
-//     const userOwnedService = Service
-//         .find({ owner: req.params.user_id })
-//         .populate('owner')
-//     const userFavServices = User
-//         .findOne({ _id: req.params.user_id }, 'servicesSaved')
-//         .populate({
-//             path: 'servicesSaved',
-//             populate: { path: 'owner' }
-//         })
+    const userOwnedService = Service
+        .find({ owner: req.params.user_id })
+        .populate('owner')
+    const userFavServices = User
+        .findOne({ _id: req.params.user_id }, 'servicesSaved')
+        .populate({
+            path: 'servicesSaved',
+            populate: { path: 'owner' }
+        })
 
-//     Promise.all([userOwnedService, userFavServices])
-//         .then(result => res.json({ owned: result[0], favs: result[1].itinerariesSaved }))
-// })
+    Promise.all([userOwnedService, userFavServices])
+        .then(result => res.json({ 
+            owned: result[0], favs: result[1].servicesSaved }))
+})
 //...hasta aquí
 
 router.post('/newService', (req, res) => {

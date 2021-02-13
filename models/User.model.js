@@ -9,7 +9,7 @@ const userSchema = new Schema({
     },
     rating: Number,
 
-    service: {
+    servicesCreated: {
         type: Schema.Types.ObjectId,
         ref: 'Service'
     },
@@ -37,7 +37,7 @@ const userSchema = new Schema({
     email: String,
     servicesSaved: [{
         type: Schema.Types.ObjectId,
-        ref: 'Services'
+        ref: 'Service'
     }],
     province: {
         type: String,

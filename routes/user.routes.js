@@ -22,18 +22,18 @@ const User = require('../models/User.model')
 // })
 
 
-// router.get('/getOneUser/:user_id', (req, res) => {
+router.get('/getOneUser/:user_id', (req, res) => {
 
-//     if (!mongoose.Types.ObjectId.isValid(req.params.user_id)) {
-//         res.status(404).json({ message: 'Invalid ID' })
-//         return
-//     }
+    if (!mongoose.Types.ObjectId.isValid(req.params.user_id)) {
+        res.status(404).json({ message: 'Invalid ID' })
+        return
+    }
 
-//     User
-//         .findById(req.params.user_id)
-//         .then(response => res.json(response))
-//         .catch(err => res.status(500).json(err))
-// })
+    User
+        .findById(req.params.user_id)
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
 
 // router.post('/newUser', (req, res) => {
 
@@ -43,13 +43,13 @@ const User = require('../models/User.model')
 //         .catch(err => res.status(500).json(err))
 // })
 
-// router.put('/editUser/:user_id', (req, res) => {
+router.put('/editUser/:user_id', (req, res) => {
 
-//     User
-//         .findByIdAndUpdate(req.params.user_id, req.body, { new: true })
-//         .then(response => res.json(response))
-//         .catch(err => res.status(500).json(err))
-// })
+    User
+        .findByIdAndUpdate(req.params.user_id, req.body, { new: true })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
 
 
 // router.get('/filterByProvince/:province', (req, res) => {

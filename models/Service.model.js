@@ -8,6 +8,11 @@ const serviceSchema = new Schema({
         require: true,
     },
     description: String,
+    situation: {
+        type: String,
+        enum: ['Pendiente de ayuda', 'En conversaciones', 'Ayuda recibida'],
+        default: 'Pendiente de ayuda'
+    },
     reward: {
         type: String,
         default: 'Por determinar',

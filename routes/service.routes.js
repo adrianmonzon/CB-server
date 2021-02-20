@@ -21,13 +21,26 @@ router.get('/getAllServices', (req, res) => {
 
 router.get('/filterByProvince/:province', (req, res) => {
 
-    User
+    Service
         .find({ province: req.params.province })
+        .populate('owner')
         .then(response => {
-            console.log(response)
             res.json(response)
         })
         .catch(err => res.status(500).json(err))
+
+})
+
+router.get('/filterBySituation/:situation', (req, res) => {
+
+    Service
+        .find({ situation: req.params.situation })
+        .populate('owner')
+        .then(response => {
+            res.json(response)
+        })
+        .catch(err => res.status(500).json(err))
+
 })
 
 
@@ -59,8 +72,9 @@ router.get('/getAllServicesFromUser/:user_id', (req, res) => {
         })
 
     Promise.all([userOwnedService, userFavServices])
-        .then(result => res.json({ 
-            owned: result[0], favs: result[1].servicesSaved }))
+        .then(result => res.json({
+            owned: result[0], favs: result[1].servicesSaved
+        }))
 })
 //...hasta aquí
 

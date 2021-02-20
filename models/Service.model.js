@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const serviceSchema = new Schema({
     name: {
         type: String,
-        default: 'Servicio',
+        default: 'Sin título',
         require: true,
     },
     description: String,
@@ -21,7 +21,8 @@ const serviceSchema = new Schema({
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    province: String,
 }, {
     timestamps: true
 })

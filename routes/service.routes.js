@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
-const { checkId } = require('./middlewares')
+// const { checkId } = require('./middlewares')
 
 const Service = require('../models/Service.model')
 const User = require('../models/User.model')
@@ -43,7 +43,6 @@ router.get('/filterBySituation/:situation', (req, res) => {
 
 })
 
-
 router.get('/getOneService/:service_id', /*checkId,*/(req, res) => {
 
     if (!mongoose.Types.ObjectId.isValid(req.params.service_id)) {
@@ -58,25 +57,23 @@ router.get('/getOneService/:service_id', /*checkId,*/(req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-//Nuevo desde aquí...
 router.get('/getAllServicesFromUser/:user_id', (req, res) => {
 
     const userOwnedService = Service
         .find({ owner: req.params.user_id })
         .populate('owner')
     const userFavServices = User
-        .findOne({ _id: req.params.user_id }, 'servicesSaved')
+        .findOne({ _id: req.params.user_id }, 'savedServices')
         .populate({
-            path: 'servicesSaved',
+            path: 'savedServices',
             populate: { path: 'owner' }
         })
 
     Promise.all([userOwnedService, userFavServices])
         .then(result => res.json({
-            owned: result[0], favs: result[1].servicesSaved
+            owned: result[0], favs: result[1].savedServices
         }))
 })
-//...hasta aquí
 
 router.post('/newService', (req, res) => {
 

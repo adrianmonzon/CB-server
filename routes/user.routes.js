@@ -13,15 +13,6 @@ const User = require('../models/User.model')
 //         .catch(err => res.status(500).json(err))
 // })
 
-// router.get('/filterByInstrument/:instrument', (req, res, next) => {
-
-//     User
-//         .find({ instrument: req.params.instrument })
-//         .then(response => res.json(response))
-//         .catch(err => next(err))
-// })
-
-
 router.get('/getOneUser/:user_id', (req, res) => {
 
     if (!mongoose.Types.ObjectId.isValid(req.params.user_id)) {
@@ -51,15 +42,26 @@ router.put('/editUser/:user_id', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
+router.put('/saveService/:service_id', (req, res) => {
 
-// router.get('/filterByProvince/:province', (req, res) => {
+    User
+        .findByIdAndUpdate(req.body.userId, { $push: { savedServices: req.params.service_id } }, { new: true })
+        .then(response => {
+            console.log(`Aquí los servicios guardados ${response}`)
+            res.json(response)
+        })
+        .catch(err => res.status(500).json(err))
+})
 
-//     User
-//         .find({ province: req.params.province })
-//         .then(response => res.json(response))
-//         .catch(err => next(err))
-// })
+router.put('/removeService/:service_id', (req, res) => {
 
+    User
+        .findByIdAndUpdate(req.body.userId, { $pull: { savedServices: req.params.service_id } }, { new: true })
+        .then(response => {
+            console.log(`Servicios favs después de eliminar ${response}`)
+            res.json(response)})
+        .catch(err => res.status(500).json(err))
+})
 
 router.delete("/deleteUser/:user_id", (req, res) => {
 

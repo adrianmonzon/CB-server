@@ -9,10 +9,10 @@ const userSchema = new Schema({
     },
     rating: Number,
 
-    servicesCreated: {
-        type: Schema.Types.ObjectId,
-        ref: 'Service'
-    },
+    // service: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Service'
+    // },
 
     age: {
         type: Number,
@@ -35,7 +35,7 @@ const userSchema = new Schema({
         default: 'GUEST'
     },
     email: String,
-    servicesSaved: [{
+    savedServices: [{
         type: Schema.Types.ObjectId,
         ref: 'Service'
     }],

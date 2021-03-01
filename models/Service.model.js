@@ -18,6 +18,14 @@ const serviceSchema = new Schema({
         default: 'Por determinar',
         require: true
     },
+    rewardImage: {
+        type: String,
+        required: true
+    },
+    // isAdded: {
+    //     type: Boolean,
+    //     default: false
+    // },
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'User'

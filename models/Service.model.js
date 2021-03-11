@@ -20,7 +20,7 @@ const serviceSchema = new Schema({
     },
     rewardImage: {
         type: String,
-        required: true
+        default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg'
     },
     // isAdded: {
     //     type: Boolean,

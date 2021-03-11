@@ -7,9 +7,9 @@ const User = require("../models/User.model")
 
 router.post('/signup', (req, res) => {
 
-    const { username, password, name, /*description,*/ age, email, /*image,*/ location, province, image } = req.body
+    const { username, password, name, /*description,*/ age, email, image, location, province } = req.body
 
-    if (!username || !password || !name || !email || !age || !province || !image ||!location) {
+    if (!username || !password || !name || !email || !age || !province /*|| !image*/ ||!location) {
         res.status(400).json({ message: 'Rellena todos los campos' })
         return
     }

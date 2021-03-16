@@ -10,6 +10,8 @@ router.post('/send-email', (req, res) => {
 
     const { contactEmail, subject, message } = req.body
 
+    console.log(req.body)
+
     transporter
         .sendMail({
             from: '"Caixabank Acción Social " <musiclandironhack@gmail.com>',
@@ -18,8 +20,10 @@ router.post('/send-email', (req, res) => {
             text: message,
             html: `<b>${message}</b>`
         })
-        .then(info => res.json(info))
-        .catch(error => console.log(error))
+        .then(info => {
+            console.log(info)
+            res.json(info)})
+        .catch(err => res.status(500).json(err))
 })
 
 

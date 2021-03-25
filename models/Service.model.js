@@ -22,10 +22,11 @@ const serviceSchema = new Schema({
         type: String,
         default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg'
     },
-    // isAdded: {
-    //     type: Boolean,
-    //     default: false
-    // },
+    rating: {
+        type: Number,
+        default: 3
+    },
+    assistant: String,
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'User'

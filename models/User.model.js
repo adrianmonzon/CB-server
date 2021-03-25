@@ -7,13 +7,11 @@ const userSchema = new Schema({
         default: 'Usuario',
         required: true
     },
-    rating: Number,
-
-    // service: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Service'
-    // },
-
+    rating: {
+        type: Number,
+        enum: [1, 2, 3, 4, 5],
+        default: 3
+    },
     age: {
         type: Number,
         min: 18
@@ -39,6 +37,10 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Service'
     }],
+    // ownedServices: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Service'
+    // }],
     province: {
         type: String,
         enum: ['Álava', 'Albacete', 'Alicante', 'Almería', 'Asturias', 'Ávila', 'Badajoz', 'Barcelona', 'Burgos', 'Cáceres',

@@ -5,13 +5,13 @@ const mongoose = require('mongoose')
 const User = require('../models/User.model')
 
 
-// router.get('/getAllUsers', (req, res) => {
+router.get('/getAllUsers', (req, res) => {
 
-//     User
-//         .find()
-//         .then(response => res.json(response))
-//         .catch(err => res.status(500).json(err))
-// })
+    User
+        .find()
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
 
 router.get('/getOneUser/:user_id', (req, res) => {
 

@@ -12,10 +12,7 @@ router.get('/getAllServices', (req, res) => {
     Service
         .find()
         .populate('owner')
-        .then(response => {
-            // console.log(response)
-            res.json(response)
-        })
+        .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
 

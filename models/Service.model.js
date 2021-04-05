@@ -31,6 +31,11 @@ const serviceSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    serviceState: {
+        type: String,
+        enum: ['open', 'closed'],
+        default: 'open'
+    },
     province: String,
 }, {
     timestamps: true

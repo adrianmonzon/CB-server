@@ -32,9 +32,9 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Service'
     }],
-    userRating: {
-        type: Number,
-        default: 3
+    userRatings: {
+        type: [Number],
+        default: [3]
     },
     province: {
         type: String,

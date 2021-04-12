@@ -11,7 +11,7 @@ router.post('/send-email', (req, res) => {
 
     transporter
         .sendMail({
-            from: '"Mensaje del sistema " <musiclandironhack@gmail.com>',
+            from: '"Caixabank Acción Social (No responder a este correo) " <musiclandironhack@gmail.com>',
             to: contactEmail,
             subject,
             text: message,

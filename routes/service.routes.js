@@ -40,6 +40,18 @@ router.get('/filterBySituation/:situation', (req, res) => {
 
 })
 
+// router.get('/filterBySituationProvince/:situation&:province', (req, res) => {
+
+//     Service
+//         .find({ situation: req.params.situation, province: req.params.province })
+//         .populate('owner')
+//         .then(response => {
+//             res.json(response)
+//         })
+//         .catch(err => res.status(500).json(err))
+
+// })
+
 router.get('/getOneService/:service_id', /*checkId,*/(req, res) => {
 
     if (!mongoose.Types.ObjectId.isValid(req.params.service_id)) {

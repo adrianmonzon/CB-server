@@ -5,13 +5,13 @@ const transporter = require('./../configs/nodemailer.config')
 
 router.post('/send-email', (req, res) => {
 
-    const { contactEmail, subject, message } = req.body
+    const { contactEmail, subject, message, sender } = req.body
 
     console.log(`Este es el req.body`, req.body)
 
     transporter
         .sendMail({
-            from: '"Caixabank Acción Social (No responder a este correo) " <musiclandironhack@gmail.com>',
+            from: sender,
             to: contactEmail,
             subject,
             text: message,
